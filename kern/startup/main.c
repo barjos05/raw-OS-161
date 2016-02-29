@@ -50,6 +50,7 @@
 #include <test.h>
 #include <version.h>
 #include "autoconf.h"  // for pseudoconfig
+#include "opt-A0.h"
 
 
 /*
@@ -100,6 +101,10 @@ boot(void)
 	kprintf("OS/161 base system version %s\n", BASE_VERSION);
 	kprintf("%s", harvard_copyright);
 	kprintf("\n");
+	hello();
+	#if OPT_A0
+   		hello();
+	#endif /* OPT_A0 */
 
 	kprintf("Joseph Barnes' system version %s (%s #%d)\n", 
 		GROUP_VERSION, buildconfig, buildversion);

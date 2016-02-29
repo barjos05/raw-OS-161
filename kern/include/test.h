@@ -89,5 +89,7 @@ void menu(char *argstr);
 /* The main function, called from start.S. */
 void kmain(char *bootstring);
 
+/* This is the prototype for the hello function from lab3 */
+void hello(void);
 
 #endif /* _TEST_H_ */
