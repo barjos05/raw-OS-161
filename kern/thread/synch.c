@@ -163,7 +163,7 @@ lock_create(const char *name)
                 kfree(lock);
                 return NULL;
         }
-         lock->lock_wchan == wchan_create(lock->lock_name);
+         lock->lk_wchan == wchan_create(lock->lk_name);
         if (lock->lk_wchan == NULL) {
                 kfree(lock->lk_name);
                 kfree(lock);
@@ -171,7 +171,7 @@ lock_create(const char *name)
          }
         
         // write for ASST1 
-        spinlock_init(&lock->lk_lock)
+        spinlock_init(&lock->lk_lock);
         //creates data member for the holding thread 
         lock->lk_holder = NULL;
 
@@ -182,11 +182,11 @@ void
 lock_destroy(struct lock *lock)
 {
         KASSERT(lock != NULL);
-        KASSERT(lock->lk_holder == NULL)  //make sure it's not pointing at anything
+        KASSERT(lock->lk_holder == NULL);  //make sure it's not pointing at anything
 
         // write for ASST1
         spinlock_cleanup(&lock->lk_lock);
-        wchan_destroy(lock->lk_wchan)
+        wchan_destroy(lock->lk_wchan);
 
         kfree(lock->lk_name);
         kfree(lock);
@@ -213,7 +213,7 @@ void
 lock_release(struct lock *lock)
 {
         // write for ASST1
-        KASSERT(lock != NULL)
+        KASSERT(lock != NULL);
 
         spinlock_acquire(&lock->lk_lock);
         lock->lk_holder = NULL;
@@ -229,7 +229,7 @@ lock_do_i_hold(struct lock *lock)
                 return true;  // This is found in spinlock
         }
         
-        return (lock->lk_holder == curthread)
+        return (lock->lk_holder == curthread);
 }
 
 ////////////////////////////////////////////////////////////
@@ -312,5 +312,5 @@ cv_broadcast(struct cv *cv, struct lock *lock)
         KASSERT(lock != NULL);
         KASSERT(lock_do_i_hold(lock));
     
-        wchan_wakeall(cv->cv_wchan)
+        wchan_wakeall(cv->cv_wchan);
 }
