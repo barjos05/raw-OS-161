@@ -218,7 +218,7 @@ lock_release(struct lock *lock)
         spinlock_acquire(&lock->lk_lock);
         lock->lk_holder = NULL;
         wchan_wakeone(lock->lk_wchan);
-        spinlock_release(&lock->lk_lock)  // suppress warning until code gets written
+        spinlock_release(&lock->lk_lock);  // suppress warning until code gets written
 }
 
 bool
